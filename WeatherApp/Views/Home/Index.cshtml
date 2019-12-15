@@ -1,0 +1,26 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="text-center">
+        <br />
+        <br />
+        <br />
+
+        <h1 class="display-1 font-weight-bold font-italic">Welcome</h1>
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+
+            <p> <a type="button" class="btn btn-primary" href="/cities">List of Cities</a>.</p>
+       }else {
+        <P class=" text-white font-weight-bold ">You are not logged in yet.</P>
+        <P class="text-white font-weight-bold "> Please <a type="button" class="btn btn-success" href="Identity/Account/Login">Log in</a> Or <a type="button" class="btn btn-primary" href="Identity/Account/Register">Register</a> </P>
+
+        }
+
+    </div>

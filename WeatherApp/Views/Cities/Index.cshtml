@@ -1,0 +1,100 @@
+﻿@model WeatherApp.Models.ListViewModel
+
+@{
+    ViewData["Title"] = "Cities";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cities</h1>
+@if (Model.cities.ToList().Count != 3) { 
+    <p>
+
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
+
+    </p>
+    }
+@if (Model.cities.Count() != 0)
+{
+ <div class="container" style=" background: rgba(0,0,0,0.7); border:solid 1px #FFD500 ; ">
+    <div class="row">
+        <div class="col-6" >
+            <table class="table text-white text-bold"  >
+                <thead style="border-top:none;">
+                    <tr style="border-top:none;">
+
+                        <th scope="col">Name</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody style="border-top:none;">
+                    @foreach (var item in Model.cities)
+                    {
+                        <tr style="border-top:none;">
+
+                            <td>@Html.DisplayFor(modelItem => item.name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.country)</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a  class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">View</a> |
+                                    <a  class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col" style="text-align:center; padding-top:15px;">
+
+            @if (Model.city != null)
+            {
+                if (Model.city.Error != null)
+                {
+                    <i style='font-size:50px;color:#FFD500;' class='fas '>&#xf06a;</i>
+                    <div style='font-size:25px; color:#FFD500;' class="city text-bold ">Oops</div>
+                    <div style='font-size:15px; color:white;' class="city text-bold ">@Model.city.Error</div>
+                }
+                else
+                {
+                    <div style='font-size:25px; color:#FFD500;' class="city text-bold "> @Model.city.name / @Model.city.country </div>
+                    <div>&nbsp;</div>
+                    <img src=@Model.city.iconUrl></img>
+                    <i class=" text-bold text-white" style="margin-left:10px;margin-right:10px;font-size:20px;"> @Model.city.weatherDesc</i>
+                    <i style='font-size:35px;color:#FFD500;' class='fas '>&#xf76b;</i>
+                    <i class="temp text-bold text-white" style="margin-left:10px;margin-right:10px;font-size:20px;">@Model.city.temp&deg; <small>C</small></i>
+                    <i style='font-size:35px;color:#FFD500;' class='fas '>&#xf72e;</i>
+                    <i class="wind text-bold text-white" style="margin-left:10px;margin-right:10px;font-size:20px;"><small></small>@Model.city.windSpeed km/h</i>
+                    <div>&nbsp;</div>
+                }
+            }
+            else
+            {
+                <div style='font-size:25px; color:#FFD500;' class="city text-bold "> City <small>(Choose a city)</small> </div>
+                <div>&nbsp;</div>
+                <i style='font-size:50px;color:#FFD500;' class='fas '>&#xf73b;</i>
+                <i class=" text-bold text-white" style="margin-left:10px;margin-right:10px;font-size:20px;"> --</i>
+                <i style='font-size:35px;color:#FFD500;' class='fas '>&#xf76b;</i>
+                <i class="temp text-bold text-white" style="margin-left:10px;margin-right:10px;font-size:20px;">--&deg; <small>C</small></i>
+                <i style='font-size:35px;color:#FFD500;' class='fas '>&#xf72e;</i>
+                <i class="wind text-bold text-white" style="margin-left:10px;margin-right:10px;font-size:20px;"><small></small>-- km/h</i>
+            }
+
+
+
+
+        </div>
+        </div>
+       
+    </div>
+}
+    
+   
+        
+            
+        
+
+
+
+
